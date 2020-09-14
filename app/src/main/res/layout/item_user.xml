@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_card"
     android:layout_width="match_parent"
     android:padding="8dp"
     android:layout_height="80dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/item_img"
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -37,13 +38,16 @@
         android:text="juan.perez@gmail.com"
         android:layout_toRightOf="@id/item_img"
         android:layout_below="@id/item_phone"
+
         />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#4A4141"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/item_email"
+        android:layout_toRightOf="@id/item_img"
+        android:layout_marginTop="8dp"
 
         />
 </RelativeLayout>

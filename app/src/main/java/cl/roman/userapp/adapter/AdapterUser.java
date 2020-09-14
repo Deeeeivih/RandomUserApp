@@ -1,11 +1,15 @@
 package cl.roman.userapp.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +18,10 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import cl.roman.userapp.DetailActivity;
 import cl.roman.userapp.R;
 import cl.roman.userapp.model.User;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
 
@@ -43,7 +49,7 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
         holder.item_email.setText(user.email);
         holder.item_phone.setText(user.phone);
         Glide.with(activity).load(user.thumbnail).into(holder.item_img);
-
+        holder.urlImage = user.thumbnail;
     }
 
     @Override
@@ -53,8 +59,11 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
 
     public class UserHolder extends RecyclerView.ViewHolder{
 
-        ImageView item_img;
+        CircleImageView item_img;
         TextView item_name, item_phone, item_email;
+        RelativeLayout item_card;
+
+        String urlImage;
 
         public UserHolder( View itemView) {
             super(itemView);
@@ -62,6 +71,23 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
             item_name = itemView.findViewById(R.id.item_name);
             item_phone = itemView.findViewById(R.id.item_phone);
             item_email = itemView.findViewById(R.id.item_email);
+            item_card = itemView.findViewById(R.id.item_card);
+
+            item_card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(activity, DetailActivity.class);
+                    intent.putExtra("NAME",item_name.getText().toString());
+                    intent.putExtra("PICTURE", urlImage);
+                    intent.putExtra("EMAIL",item_email.getText().toString());
+                    intent.putExtra("PHONE",item_phone.getText().toString());
+                    activity.startActivity(intent);
+                    /*Toast.makeText(activity,
+                            "Hello "+item_name.getText().toString(),
+                            Toast.LENGTH_LONG).show();*/
+
+                }
+            });
 
         }
     }
