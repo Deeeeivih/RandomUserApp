@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -57,7 +58,7 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
         return list.size();
     }
 
-    public class UserHolder extends RecyclerView.ViewHolder{
+    public class UserHolder extends RecyclerView.ViewHolder {
 
         CircleImageView item_img;
         TextView item_name, item_phone, item_email;
@@ -88,8 +89,19 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
 
                 }
             });
+            
+            item_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(activity,
+                            "Hello "+item_name.getText().toString(),
+                            Toast.LENGTH_LONG).show();
+                }
+            });
 
         }
+
+
     }
 
 
